@@ -36,7 +36,7 @@ class Category extends Component {
   }
 
   componentDidMount() {
-    this. getPageNum();
+    this.getPageNum();
     this.loadCategories();
   }
 
@@ -55,9 +55,11 @@ class Category extends Component {
     .then(res => res.json() )
     .catch(error => console.error('Error:', error))
     .then( res => {
-      // console.log( res );
-      this.setState({ 
+      //console.log( res );
+      this.setState({
+        // eslint-disable-next-line
         _COUNT: parseInt(res),
+        // eslint-disable-next-line
         _PAGE_NUM: Math.ceil( parseInt(res) / global.ITEMS_PER_PAGE ),
       });
       // console.log( this.state._PAGE_NUM ); 
@@ -92,7 +94,7 @@ class Category extends Component {
   showPage(page) {
     this.setState({ _CURRENT_PAGE: page });
 
-    this. getPageNum();
+    this.getPageNum();
     this.loadCategories();
   }
 
@@ -119,7 +121,7 @@ class Category extends Component {
         newCatName: '',
         newCatDesc: '',
       });
-      this. getPageNum();
+      this.getPageNum();
       this.loadCategories();
 
     });
