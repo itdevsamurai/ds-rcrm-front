@@ -23,7 +23,23 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 
 class DefaultLayout extends Component {
+  
+  constructor(props){
+    super(props);
+    const token = localStorage.getItem('token') ;
+    let notLoginYet = token? false: true;
+
+    this.state = {
+      notLoginYet: notLoginYet,
+    };
+  };
+
   render() {
+
+    if (this.state.notLoginYet) {
+      return <Redirect to='/login'/>;
+    }
+
     return (
       <div className="app">
         <AppHeader fixed>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Col, Container, Input, Row, Label } from 'reactstrap';
 import { Card, CardBody, CardHeader, CardFooter, Pagination, PaginationItem, PaginationLink, Table, Form, FormGroup} from 'reactstrap';
-import { Redirect } from 'react-router-dom'
 import { config, global } from '../../../constants';
 
 const CATEGORIES = [
@@ -18,15 +17,11 @@ class Category extends Component {
   constructor(props) {
     super(props);
 
-    const token = localStorage.getItem('token') ;
-    let notLoginYet = token? false: true;
-
     this.state = {
       _CURRENT_PAGE: 1,
       _PAGE_NUM: 0,
       _COUNT: 0,
       editMode: false,
-      notLoginYet: notLoginYet,
       categoryList: CATEGORIES,
     };
 
@@ -222,11 +217,7 @@ class Category extends Component {
 
   render() {
 
-    const { notLoginYet, categoryList, _COUNT, newCatName, newCatDesc, editMode, editCatName, editCatDesc, _CURRENT_PAGE, _PAGE_NUM } = this.state;
-
-    if (notLoginYet) {
-      return <Redirect to='/login'/>;
-    }
+    const { categoryList, _COUNT, newCatName, newCatDesc, editMode, editCatName, editCatDesc, _CURRENT_PAGE, _PAGE_NUM } = this.state;
 
     if ( editMode === true ) {
       return (

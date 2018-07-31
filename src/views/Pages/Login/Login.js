@@ -49,9 +49,7 @@ class Login extends Component {
       return res.json();
     })
     .then( res => {
-      if (!res.statusCode) {
-        // console.log( res );
-        // console.log( 'privious token = ' +  localStorage.getItem('token') );
+      if (!res.error) {
         localStorage.setItem('token', res.jwt);
 
         this.setState({ loginStatus: true });
