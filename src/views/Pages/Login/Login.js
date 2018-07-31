@@ -44,11 +44,11 @@ class Login extends Component {
         password: this.state.password,
       }),
     })
-    .then(res => res.json())
-    .catch(error => console.error('Error:', error))
     .then( res => {
-
-
+      if (!res.ok) console.error('Error:', res);
+      return res.json();
+    })
+    .then( res => {
       if (!res.statusCode) {
         // console.log( res );
         // console.log( 'privious token = ' +  localStorage.getItem('token') );
@@ -62,6 +62,7 @@ class Login extends Component {
         this.setState({ loginMsg: res.message });
       }
     })
+    // .catch(error => console.error('Error:', error));
 
   }
 

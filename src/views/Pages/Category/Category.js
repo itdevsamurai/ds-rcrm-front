@@ -58,7 +58,10 @@ class Category extends Component {
         'Authorization': 'Bearer ' + token
       }
     })
-    .then(res => res.json() )
+    .then( res => {
+      if (!res.ok) console.error('Error:', res);
+      return res.json();
+    })
     .catch(error => console.error('Error:', error))
     .then( res => {
       //console.log( res );
@@ -69,7 +72,8 @@ class Category extends Component {
         _PAGE_NUM: Math.ceil( parseInt(res) / global.ITEMS_PER_PAGE ),
       });
       // console.log( this.state._PAGE_NUM ); 
-    });
+    })
+    .catch(error => console.error('Error:', error));
   }
 
 
@@ -89,12 +93,15 @@ class Category extends Component {
         'Authorization': 'Bearer ' + token
       }
     })
-    .then(res => res.json() )
-    .catch(error => console.error('Error:', error))
+    .then( res => {
+      if (!res.ok) console.error('Error:', res);
+      return res.json();
+    })
     .then( res => {
       // console.log( res );
       this.setState({ categoryList: res });
-    });
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   async showPage(page) {
@@ -122,6 +129,8 @@ class Category extends Component {
       }),
     })
     .then( res => {
+      if (!res.ok) console.error('Error:', res);
+
       // console.log( res );
       this.setState({ 
         newCatName: '',
@@ -130,7 +139,8 @@ class Category extends Component {
       this.getPageNum();
       this.loadCategories();
 
-    });
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   deleteCategory(id) {
@@ -145,10 +155,12 @@ class Category extends Component {
       }
     })
     .then( res => {
+      if (!res.ok) console.error('Error:', res);
       // console.log( res );
       this.getPageNum();
       this.loadCategories();
-    });
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   editCategory(category) {
@@ -178,6 +190,7 @@ class Category extends Component {
       }),
     })
     .then( res => {
+      if (!res.ok) console.error('Error:', res);
       // console.log( res );
       this.setState({ 
         editMode: false
@@ -185,7 +198,8 @@ class Category extends Component {
 
       this.getPageNum();
       this.loadCategories();
-    });
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   cancelEdit() {
